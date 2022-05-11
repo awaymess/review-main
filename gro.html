@@ -1,0 +1,389 @@
+<!-- Styles -->
+<style>
+  #chartdiv {
+    width: 100%;
+    height: 900px;
+  }
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<!-- Chart code -->
+<script>
+  am5.ready(function () {
+
+    // Country data
+    var data = [
+      { year: 2004, id: "AF" },
+      { year: 2001, id: "AL" },
+      { year: 1989, id: "DZ" },
+      { year: 2015, id: "AD" },
+      { year: 2017, id: "AO" },
+      { year: 1989, id: "AG" },
+      { year: 1989, id: "AR" },
+      { year: 1997, id: "AM" },
+      { year: 1975, id: "AU" },
+      { year: 1961, id: "AT" },
+      { year: 2000, id: "AZ" },
+      { year: 2006, id: "BS" },
+      { year: 1988, id: "BH" },
+      { year: 1992, id: "BD" },
+      { year: 1993, id: "BB" },
+      { year: 1960, id: "BY" },
+      { year: 1975, id: "BE" },
+      { year: 2021, id: "BZ" },
+      { year: 1974, id: "BJ" },
+      { year: 2014, id: "BT" },
+      { year: 1995, id: "BO" },
+      { year: 1993, id: "BA" },
+      { year: 1971, id: "BW" },
+      { year: 2002, id: "BR" },
+      { year: 1996, id: "BN" },
+      { year: 1961, id: "BG" },
+      { year: 1987, id: "BF" },
+      { year: 2014, id: "BI" },
+      { year: 2018, id: "CV" },
+      { year: 1960, id: "KH" },
+      { year: 1988, id: "CM" },
+      { year: 1986, id: "CA" },
+      { year: 1962, id: "CF" },
+      { year: 1975, id: "CL" },
+      { year: 1987, id: "CN" },
+      { year: 1979, id: "CO" },
+      { year: 2015, id: "KM" },
+      { year: 2009, id: "CK" },
+      { year: 1987, id: "CR" },
+      { year: 1991, id: "CI" },
+      { year: 1993, id: "HR" },
+      { year: 1974, id: "CU" },
+      { year: 1980, id: "CY" },
+      { year: 1993, id: "CZ" },
+      { year: 2014, id: "CD" },
+      { year: 1972, id: "DK" },
+      { year: 1983, id: "DJ" },
+      { year: 1988, id: "DM" },
+      { year: 2002, id: "DO" },
+      { year: 1962, id: "EC" },
+      { year: 1959, id: "EG" },
+      { year: 1998, id: "SV" },
+      { year: 1993, id: "EE" },
+      { year: 2020, id: "ET" },
+      { year: 2010, id: "FJ" },
+      { year: 1962, id: "FI" },
+      { year: 1959, id: "FR" },
+      { year: 2006, id: "GA" },
+      { year: 1994, id: "GE" },
+      { year: 1975, id: "DE" },
+      { year: 1968, id: "GH" },
+      { year: 1962, id: "GR" },
+      { year: 1984, id: "GT" },
+      { year: 1991, id: "GN" },
+      { year: 2014, id: "GY" },
+      { year: 1983, id: "HT" },
+      { year: 1975, id: "VA" },
+      { year: 2000, id: "HN" },
+      { year: 1962, id: "HU" },
+      { year: 2002, id: "IS" },
+      { year: 1960, id: "IN" },
+      { year: 1981, id: "ID" },
+      { year: 2001, id: "IR" },
+      { year: 2021, id: "IQ" },
+      { year: 1981, id: "IE" },
+      { year: 1959, id: "IL" },
+      { year: 1969, id: "IT" },
+      { year: 2002, id: "JM" },
+      { year: 1961, id: "JP" },
+      { year: 1979, id: "JO" },
+      { year: 1995, id: "KZ" },
+      { year: 1989, id: "KE" },
+      { year: 1978, id: "KW" },
+      { year: 1996, id: "KG" },
+      { year: 1998, id: "LA" },
+      { year: 1992, id: "LV" },
+      { year: 1998, id: "LB" },
+      { year: 1989, id: "LS" },
+      { year: 2005, id: "LR" },
+      { year: 2011, id: "LI" },
+      { year: 1995, id: "LT" },
+      { year: 1983, id: "LU" },
+      { year: 1962, id: "MG" },
+      { year: 2021, id: "MW" },
+      { year: 1985, id: "MY" },
+      { year: 2019, id: "MV" },
+      { year: 1994, id: "ML" },
+      { year: 2000, id: "MT" },
+      { year: 2006, id: "MH" },
+      { year: 1997, id: "MR" },
+      { year: 1996, id: "MU" },
+      { year: 1971, id: "MX" },
+      { year: 1982, id: "MC" },
+      { year: 1994, id: "MN" },
+      { year: 2006, id: "ME" },
+      { year: 1959, id: "MA" },
+      { year: 1998, id: "MZ" },
+      { year: 2013, id: "MM" },
+      { year: 1998, id: "NP" },
+      { year: 1964, id: "NL" },
+      { year: 1983, id: "NZ" },
+      { year: 2003, id: "NI" },
+      { year: 1964, id: "NE" },
+      { year: 1970, id: "NG" },
+      { year: 1994, id: "MK" },
+      { year: 1961, id: "NO" },
+      { year: 1999, id: "OM" },
+      { year: 2005, id: "PK" },
+      { year: 2020, id: "PW" },
+      { year: 1984, id: "PA" },
+      { year: 2019, id: "PG" },
+      { year: 1997, id: "PY" },
+      { year: 1988, id: "PE" },
+      { year: 1967, id: "PH" },
+      { year: 1961, id: "PL" },
+      { year: 1994, id: "PT" },
+      { year: 2002, id: "QA" },
+      { year: 1973, id: "KR" },
+      { year: 1998, id: "MD" },
+      { year: 1961, id: "RO" },
+      { year: 1960, id: "RU" },
+      { year: 2008, id: "RW" },
+      { year: 1979, id: "SM" },
+      { year: 2012, id: "ST" },
+      { year: 1994, id: "SA" },
+      { year: 1994, id: "SN" },
+      { year: 2001, id: "RS" },
+      { year: 2020, id: "SC" },
+      { year: 2020, id: "SL" },
+      { year: 1986, id: "SG" },
+      { year: 1993, id: "SK" },
+      { year: 1992, id: "SI" },
+      { year: 1976, id: "ZA" },
+      { year: 1977, id: "ES" },
+      { year: 1962, id: "LK" },
+      { year: 2000, id: "VC" },
+      { year: 2015, id: "PS" },
+      { year: 2018, id: "SD" },
+      { year: 1972, id: "SE" },
+      { year: 1965, id: "CH" },
+      { year: 1959, id: "SY" },
+      { year: 2012, id: "TJ" },
+      { year: 1959, id: "TH"  },
+      { year: 2020, id: "TO" },
+      { year: 1966, id: "TT" },
+      { year: 1967, id: "TN" },
+      { year: 1992, id: "TR" },
+      { year: 1992, id: "UG" },
+      { year: 1960, id: "UA" },
+      { year: 2006, id: "AE" },
+      { year: 1975, id: "GB" },
+      { year: 1964, id: "TZ" },
+      { year: 1970, id: "US" },
+      { year: 1983, id: "UY" },
+      { year: 1996, id: "UZ" },
+      { year: 1995, id: "VE" },
+      { year: 1995, id: "VN" },
+      { year: 2002, id: "ZM" },
+      { year: 1994, id: "ZW" }
+    ];
+
+    // Create root element
+    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+    var root = am5.Root.new("chartdiv");
+
+
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+
+
+    // Create the map chart
+    // https://www.amcharts.com/docs/v5/charts/map-chart/
+    var chart = root.container.children.push(am5map.MapChart.new(root, {
+      panX: "rotateX",
+      panY: "translateY",
+      projection: am5map.geoNaturalEarth1()
+    }));
+
+    // Title
+    chart.children.unshift(am5.Label.new(root, {
+      text: "A timeline of countries carbon dioxygen",
+      fontSize: 22,
+      fontWeight: "400",
+      textAlign: "center",
+      x: am5.percent(50),
+      centerX: am5.percent(50)
+    }));
+
+
+    // Create main polygon series for countries
+    // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+    var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+      geoJSON: am5geodata_worldLow,
+      valueField: "value",
+      calculateAggregates: true
+    }));
+
+    polygonSeries.set("heatRules", [{
+      target: polygonSeries.mapPolygons.template,
+      dataField: "value",
+      min: am5.color(0xff621f),
+      max: am5.color(0x661f00),
+      key: "fill"
+    }]);
+
+
+
+    polygonSeries.mapPolygons.template.setAll({
+      tooltipText: "{name}",
+      toggleKey: "active",
+      interactive: true
+    });
+
+    polygonSeries.mapPolygons.template.events.on("pointerover", function(ev) {
+      heatLegend.showValue(ev.target.dataItem.get("value"));
+    });
+
+    var heatLegend = chart.children.push(am5.HeatLegend.new(root, {
+      orientation: "vertical",
+      startColor: am5.color(0xff621f),
+      endColor: am5.color(0x661f00),
+      startText: "Lowest",
+      endText: "Highest",
+      stepCount: 5
+    }));
+    
+    heatLegend.startLabel.setAll({
+      fontSize: 12,
+      fill: heatLegend.get("startColor")
+    });
+    
+    heatLegend.endLabel.setAll({
+      fontSize: 12,
+      fill: heatLegend.get("endColor")
+    });
+    
+    // change this to template when possible
+    polygonSeries.events.on("datavalidated", function () {
+      heatLegend.set("startValue", polygonSeries.getPrivate("valueLow"));
+      heatLegend.set("endValue", polygonSeries.getPrivate("valueHigh"));
+    });
+
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: root.interfaceColors.get("primaryButtonHover")
+    });
+
+    polygonSeries.mapPolygons.template.states.create("active", {
+      fill: root.interfaceColors.get("primaryButtonActive")
+    });
+
+    // Set clicking on "water" to zoom out
+    chart.chartContainer.get("background").events.on("click", function () {
+      chart.goHome();
+    })
+
+    // Make stuff animate on load
+    chart.appear(1000, 100);
+
+    // Aggregate data
+    var years = {};
+    var firstYear = 99999;
+    var lastYear = 0;
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      var year = row.year;
+      if (years[year] == undefined) {
+        years[year] = [];
+      }
+      years[year].push(row.country);
+
+      if (firstYear > year) {
+        firstYear = year;
+      }
+      if (lastYear < year) {
+        lastYear = year;
+      }
+    }
+
+    // Create controls
+    var container = chart.children.push(am5.Container.new(root, {
+      y: am5.p100,
+      centerX: am5.p50,
+      centerY: am5.p100,
+      x: am5.p50,
+      width: am5.percent(90),
+      layout: root.horizontalLayout,
+      paddingBottom: 10
+    }));
+
+    var playButton = container.children.push(am5.Button.new(root, {
+      themeTags: ["play"],
+      centerY: am5.p50,
+      marginRight: 40,
+      icon: am5.Graphics.new(root, {
+        themeTags: ["icon"]
+      })
+    }));
+
+    playButton.events.on("click", function () {
+      if (playButton.get("active")) {
+        slider.set("start", slider.get("start") + 0.0001);
+      } else {
+        slider.animate({
+          key: "start",
+          to: 1,
+          duration: 15000 * (1 - slider.get("start"))
+        });
+      }
+    });
+
+    var slider = container.children.push(am5.Slider.new(root, {
+      //width: am5.percent(80),
+      orientation: "horizontal",
+      start: 0,
+      centerY: am5.p50
+    }));
+
+    slider.startGrip.get("icon").set("forceHidden", true);
+    slider.startGrip.set("label", am5.Label.new(root, {
+      text: firstYear + "",
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingBottom: 0,
+      paddingLeft: 0
+    }));
+
+
+    updateCountries(firstYear);
+
+    slider.events.on("rangechanged", function () {
+      var year = firstYear + Math.round(slider.get("start", 0) * (lastYear - firstYear));
+      slider.startGrip.get("label").set("text", year + "");
+      updateCountries(year);
+      console.log(year)
+      // updateSeriesData(
+      //   firstYear + Math.round(slider.get("start", 0) * (lastYear - firstYear))
+      // );
+    });
+
+    function updateCountries(year) {
+      am5.object.each(years, function (joinYear, countries) {
+        //console.log(countries)
+        am5.array.each(countries, function (country) {
+          var dataItem = polygonSeries.getDataItemById(country);
+          if (dataItem) {
+            dataItem.get("mapPolygon").set("active", joinYear <= year)
+          }
+        })
+      })
+    }
+
+  }); // end am5.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
